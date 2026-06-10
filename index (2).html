@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSPs Acquisition — Predictable Client Acquisition for Managed Service Providers</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#060E1F;
+  --dark2:#0C1A35;
+  --dark3:#122048;
+  --accent:#00C2FF;
+  --accent2:#0070C9;
+  --gold:#F5A623;
+  --white:#FFFFFF;
+  --muted:rgba(255,255,255,0.45);
+  --border:rgba(255,255,255,0.08);
+  --card:rgba(255,255,255,0.04);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--white);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,14,31,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem}
+.logo{font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:700;color:var(--white);text-decoration:none;letter-spacing:-0.3px}
+.logo span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:2rem}
+.nav-right a{text-decoration:none;color:var(--muted);font-size:0.88rem;transition:color 0.2s}
+.nav-right a:hover{color:var(--white)}
+.btn-cta-sm{background:var(--accent);color:var(--dark)!important;padding:0.55rem 1.3rem;border-radius:6px;font-weight:600!important;font-size:0.85rem!important;transition:opacity 0.2s!important}
+.btn-cta-sm:hover{opacity:0.88!important}
+
+/* HERO */
+.hero{min-height:88vh;display:flex;align-items:center;padding:5rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 70% 40%,rgba(0,194,255,0.08) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(0,112,201,0.07) 0%,transparent 60%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,194,255,0.1);border:1px solid rgba(0,194,255,0.25);color:var(--accent);font-size:0.78rem;font-weight:500;padding:0.35rem 1rem;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.12;letter-spacing:-1px;max-width:720px;margin-bottom:1.4rem}
+.hero h1 .line2{color:var(--accent)}
+.hero-sub{font-size:1.05rem;color:var(--muted);font-weight:300;max-width:520px;line-height:1.8;margin-bottom:2.5rem}
+.hero-sub strong{color:rgba(255,255,255,0.8);font-weight:500}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-primary{background:var(--accent);color:var(--dark);padding:0.9rem 2.2rem;border-radius:7px;font-weight:600;font-size:0.95rem;text-decoration:none;border:none;cursor:pointer;transition:transform 0.18s,box-shadow 0.18s;display:inline-block;font-family:'Inter',sans-serif}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,194,255,0.25)}
+.hero-note{font-size:0.8rem;color:var(--muted)}
+.hero-proof{display:flex;gap:2.5rem;margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.proof-item .num{font-family:'Sora',sans-serif;font-size:1.9rem;font-weight:700;color:var(--white);line-height:1}
+.proof-item .num span{color:var(--accent)}
+.proof-item .lbl{font-size:0.8rem;color:var(--muted);margin-top:0.3rem}
+
+/* VSL */
+.vsl-wrap{margin:2.8rem 0 1rem;max-width:780px}
+.vsl-label{font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem}
+.vsl-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+.vsl-container{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;border:1px solid rgba(0,194,255,0.2);background:#0C1A35;cursor:pointer}
+.vsl-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+.vsl-play{width:72px;height:72px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:transform 0.2s,box-shadow 0.2s}
+.vsl-play:hover{transform:scale(1.08);box-shadow:0 0 0 12px rgba(0,194,255,0.12)}
+.vsl-play svg{width:26px;height:26px;fill:var(--dark);margin-left:4px}
+.vsl-title{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);text-align:center;max-width:380px;line-height:1.4}
+.vsl-duration{font-size:0.8rem;color:var(--muted)}
+.vsl-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.vsl-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,255,0.06),transparent 70%);pointer-events:none}
+.vsl-note{font-size:0.78rem;color:var(--muted);margin-top:0.75rem;display:flex;align-items:center;gap:0.4rem}
+.vsl-note::before{content:'ℹ';font-size:0.85rem;color:var(--accent);opacity:0.7}
+/* PROBLEM */
+.problem{padding:5rem 2rem;background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-inner{max-width:1080px;margin:0 auto}
+.tag{font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+.section-title{font-family:'Sora',sans-serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.5px;line-height:1.2;margin-bottom:1rem}
+.section-sub{color:var(--muted);font-size:1rem;font-weight:300;line-height:1.8;max-width:540px}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-top:3rem}
+.pain-item{background:var(--dark);padding:2rem;display:flex;gap:1rem;align-items:flex-start}
+.pain-icon{width:36px;height:36px;border-radius:8px;background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.pain-item h4{font-size:0.95rem;font-weight:600;margin-bottom:0.3rem;color:var(--white)}
+.pain-item p{font-size:0.85rem;color:var(--muted);line-height:1.65}
+
+/* HOW */
+.how{padding:5rem 2rem}
+.how-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.how-steps{display:flex;flex-direction:column;gap:0}
+.how-step{display:flex;gap:1.2rem;padding:1.5rem 0;border-bottom:1px solid var(--border);position:relative}
+.how-step:last-child{border-bottom:none}
+.step-dot{width:36px;height:36px;border-radius:50%;background:var(--dark3);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:0.8rem;font-weight:700;color:var(--accent);flex-shrink:0;margin-top:2px}
+.how-step h3{font-size:1rem;font-weight:600;margin-bottom:0.3rem}
+.how-step p{font-size:0.88rem;color:var(--muted);line-height:1.65}
+.how-visual{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.how-visual::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,255,0.08),transparent 70%)}
+.pipeline{display:flex;flex-direction:column;gap:0.75rem}
+.pipe-row{display:flex;align-items:center;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem}
+.pipe-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0}
+.pipe-row .pipe-label{font-size:0.85rem;font-weight:500;flex:1}
+.pipe-row .pipe-count{font-size:0.8rem;font-weight:600;color:var(--accent);background:rgba(0,194,255,0.1);padding:0.2rem 0.6rem;border-radius:100px}
+.pipe-row .pipe-status{font-size:0.75rem;font-weight:500;padding:0.2rem 0.6rem;border-radius:100px}
+.s-green{background:rgba(34,197,94,0.12);color:#4ade80}
+.s-blue{background:rgba(0,194,255,0.12);color:var(--accent)}
+.s-amber{background:rgba(245,166,35,0.12);color:var(--gold)}
+.visual-title{font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:1.2rem}
+
+/* WHO */
+.who{padding:5rem 2rem;background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:3rem}
+.who-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.check{width:24px;height:24px;border-radius:50%;background:rgba(0,194,255,0.12);border:1px solid rgba(0,194,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:0.75rem;color:var(--accent)}
+.who-card h4{font-size:0.95rem;font-weight:600;margin-bottom:0.3rem}
+.who-card p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+
+/* OFFER */
+.offer{padding:5rem 2rem}
+.offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.offer-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:border-color 0.2s}
+.offer-card:hover{border-color:rgba(0,194,255,0.3)}
+.offer-card.featured{border-color:var(--accent);background:rgba(0,194,255,0.04)}
+.offer-badge{display:inline-block;background:var(--accent);color:var(--dark);font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em}
+.offer-card h3{font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:0.5rem}
+.offer-card .desc{font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
+.offer-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.offer-list li{font-size:0.85rem;color:rgba(255,255,255,0.7);display:flex;gap:0.6rem;align-items:flex-start}
+.offer-list li::before{content:'→';color:var(--accent);flex-shrink:0;font-weight:600}
+
+/* CTA */
+.cta{padding:5rem 2rem;background:var(--dark2);border-top:1px solid var(--border)}
+.cta-box{max-width:680px;margin:0 auto;text-align:center}
+.cta-box h2{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;letter-spacing:-0.5px;margin-bottom:0.8rem;line-height:1.2}
+.cta-box h2 span{color:var(--accent)}
+.cta-box p{color:var(--muted);font-size:1rem;font-weight:300;line-height:1.8;margin-bottom:2.5rem}
+.cal-embed{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2.5rem;text-align:left}
+.form-row{display:flex;flex-direction:column;gap:0.75rem}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:0.85rem 1rem;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,0.05);color:var(--white);font-size:0.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
+.form-row input::placeholder,.form-row textarea::placeholder{color:rgba(255,255,255,0.25)}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:rgba(0,194,255,0.5)}
+.form-row select option{background:#0C1A35;color:var(--white)}
+.form-row textarea{resize:none;height:80px}
+.form-two{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.btn-book{width:100%;background:var(--accent);color:var(--dark);padding:0.95rem;border-radius:8px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:'Sora',sans-serif;letter-spacing:-0.2px;transition:transform 0.18s,box-shadow 0.18s;margin-top:0.25rem}
+.btn-book:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,194,255,0.3)}
+.form-note{font-size:0.78rem;color:var(--muted);text-align:center;margin-top:0.5rem}
+.form-label{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.3rem}
+
+/* FOOTER */
+footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center}
+footer .logo{display:inline-block;margin-bottom:0.5rem}
+footer p{font-size:0.82rem;color:var(--muted)}
+footer a{color:rgba(255,255,255,0.35);text-decoration:none}
+footer a:hover{color:var(--accent)}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav-right a:not(.btn-cta-sm){display:none}
+  .how-layout{grid-template-columns:1fr}
+  .form-two{grid-template-columns:1fr}
+  .hero-proof{gap:1.5rem}
+}
+@media(max-width:480px){
+  .hero{padding:4rem 1.2rem 3rem}
+  section,.problem,.who,.offer,.cta{padding:3.5rem 1.2rem}
+}
+
+/* FADE IN */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge,.hero h1,.hero-sub,.hero-btns,.hero-proof{animation:fadeUp 0.55s ease both}
+.hero h1{animation-delay:0.08s}
+.hero-sub{animation-delay:0.16s}
+.hero-btns{animation-delay:0.24s}
+.hero-proof{animation-delay:0.32s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">MSPs<span>Acquisition</span>.com</a>
+    <div class="nav-right">
+      <a href="#how">How It Works</a>
+      <a href="#offer">What You Get</a>
+      <a href="#book" class="btn-cta-sm">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Done-For-You Client Acquisition</div>
+    <h1>We Book Qualified IT Decision-Makers<br><span class="line2">Directly Into Your MSP's Calendar.</span></h1>
+    <p class="hero-sub">Most MSPs waste thousands on marketing that brings tire-kickers. We run a <strong>systematic outreach engine</strong> that finds, qualifies, and books <strong>real business owners</strong> who need managed services — and delivers them as booked calls.</p>
+    <div class="hero-btns">
+      <a href="#book" class="btn-primary">Book Your Free Discovery Call →</a>
+      <span class="hero-note">No retainer until you see proof of concept</span>
+    </div>
+
+    <!-- VSL SECTION -->
+    <div class="vsl-wrap">
+      <div class="vsl-label">Watch — How It Works (3 min)</div>
+      <div class="vsl-container" id="vslBox" onclick="loadVSL()">
+        <div class="vsl-grid"></div>
+        <div class="vsl-glow"></div>
+        <div class="vsl-placeholder" id="vslPlaceholder">
+          <div class="vsl-play">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="vsl-title">How We Fill Your MSP's Calendar With Qualified Discovery Calls</div>
+          <div class="vsl-duration">3:45 min &nbsp;·&nbsp; No fluff, no pitch — just the system</div>
+        </div>
+      </div>
+      <div class="vsl-note">Replace the placeholder with your YouTube or Loom link — see comment in the HTML</div>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="num">2–4<span>wks</span></div>
+        <div class="lbl">Time to first booked call</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">100<span>%</span></div>
+        <div class="lbl">Focused on MSP clients only</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">0</div>
+        <div class="lbl">Cold calling done by you</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">B2B</div>
+        <div class="lbl">Decision-makers only, no SMB tire-kickers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="tag">The Problem</div>
+    <h2 class="section-title">MSPs Are Great at IT.<br>Not at Filling Their Pipeline.</h2>
+    <p class="section-sub">You deliver excellent service — but finding new clients takes time you don't have, and most marketing agencies don't understand the MSP space.</p>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="pain-icon">⏳</div>
+        <div>
+          <h4>No time to prospect</h4>
+          <p>You're busy keeping clients happy. Chasing cold leads yourself means something always suffers.</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">🎯</div>
+        <div>
+          <h4>Generic agencies don't get MSPs</h4>
+          <p>They run ads that bring the wrong businesses — too small, wrong industry, or already locked into a contract.</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">📉</div>
+        <div>
+          <h4>Referrals are unpredictable</h4>
+          <p>Word of mouth is great but you can't scale a business on it. You need a repeatable, controllable pipeline.</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">💸</div>
+        <div>
+          <h4>High CPL, low close rate</h4>
+          <p>Most leads aren't pre-qualified — you spend hours on calls that never convert to MRR.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="tag">The System</div>
+    <h2 class="section-title">A Systematic Outreach Engine<br>Built Exclusively for MSPs</h2>
+    <div class="how-layout">
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-dot">01</div>
+          <div>
+            <h3>We define your ideal client profile</h3>
+            <p>Industry, company size, geography, tech stack, pain points. We build a hyper-targeted list of companies that are a perfect fit for your MSP.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-dot">02</div>
+          <div>
+            <h3>We craft outreach that converts</h3>
+            <p>Multi-channel sequences — LinkedIn, email, and follow-ups — written specifically for IT decision-makers. No templates. No spam.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-dot">03</div>
+          <div>
+            <h3>We handle all replies & qualify leads</h3>
+            <p>We manage the conversation, qualify each prospect against your criteria, and only pass over contacts who are genuinely interested and a fit.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-dot">04</div>
+          <div>
+            <h3>Qualified call lands in your calendar</h3>
+            <p>You receive a booked discovery call with a pre-qualified IT buyer. You show up, run your sales process, and close. We do the rest.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-visual">
+        <div class="visual-title">Live Pipeline View — Example</div>
+        <div class="pipeline">
+          <div class="pipe-row">
+            <div class="pipe-icon" style="background:rgba(0,194,255,0.1)">📋</div>
+            <div class="pipe-label">Prospects Identified</div>
+            <div class="pipe-count">847</div>
+            <div class="pipe-status s-blue">Active</div>
+          </div>
+          <div class="pipe-row">
+            <div class="pipe-icon" style="background:rgba(245,166,35,0.1)">✉️</div>
+            <div class="pipe-label">Outreach Sent</div>
+            <div class="pipe-count">312</div>
+            <div class="pipe-status s-amber">Running</div>
+          </div>
+          <div class="pipe-row">
+            <div class="pipe-icon" style="background:rgba(139,92,246,0.1)">💬</div>
+            <div class="pipe-label">Replies Received</div>
+            <div class="pipe-count">41</div>
+            <div class="pipe-status s-blue">Managed</div>
+          </div>
+          <div class="pipe-row">
+            <div class="pipe-icon" style="background:rgba(34,197,94,0.1)">✅</div>
+            <div class="pipe-label">Qualified Leads</div>
+            <div class="pipe-count">14</div>
+            <div class="pipe-status s-green">Ready</div>
+          </div>
+          <div class="pipe-row">
+            <div class="pipe-icon" style="background:rgba(0,194,255,0.1)">📅</div>
+            <div class="pipe-label">Calls Booked</div>
+            <div class="pipe-count">9</div>
+            <div class="pipe-status s-green">Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="who">
+  <div class="section-inner">
+    <div class="tag">Is This For You?</div>
+    <h2 class="section-title">Built for MSPs Who Are Ready to Grow</h2>
+    <p class="section-sub">This isn't for everyone. We work best with MSPs who match this profile.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="check">✓</div>
+        <h4>You have delivery capacity</h4>
+        <p>You can actually onboard 2–5 new clients over the next 90 days. We'll fill your pipeline — make sure you can handle it.</p>
+      </div>
+      <div class="who-card">
+        <div class="check">✓</div>
+        <h4>You have a clear target market</h4>
+        <p>You know what industries or business sizes you serve best. The more specific, the better our outreach performs.</p>
+      </div>
+      <div class="who-card">
+        <div class="check">✓</div>
+        <h4>You close well, just need more at-bats</h4>
+        <p>You're good on calls and your service is solid — you just don't have a reliable flow of qualified discovery calls.</p>
+      </div>
+      <div class="who-card">
+        <div class="check">✓</div>
+        <h4>You're done with unpredictable referrals</h4>
+        <p>You want a system you can turn up and down, forecast from, and scale — not just hoping someone refers you next month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer" id="offer">
+  <div class="section-inner">
+    <div class="tag">What You Get</div>
+    <h2 class="section-title">One Goal: Booked Calls<br>With Qualified IT Buyers</h2>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <h3>Prospect Research</h3>
+        <p class="desc">We build a targeted list of companies matching your ideal client profile — industry, headcount, location, tech indicators.</p>
+        <ul class="offer-list">
+          <li>ICP definition workshop</li>
+          <li>Verified contact database</li>
+          <li>Company + decision-maker data</li>
+          <li>Technology stack signals</li>
+        </ul>
+      </div>
+      <div class="offer-card featured">
+        <div class="offer-badge">Core Deliverable</div>
+        <h3>Done-For-You Outreach</h3>
+        <p class="desc">Multi-touch LinkedIn + email sequences, managed entirely by us. You never write a cold message or chase a follow-up again.</p>
+        <ul class="offer-list">
+          <li>Personalised outreach copy</li>
+          <li>LinkedIn + email campaigns</li>
+          <li>Follow-up sequences (5–7 touches)</li>
+          <li>Reply handling & qualifying</li>
+          <li>Objection management</li>
+        </ul>
+      </div>
+      <div class="offer-card">
+        <h3>Booked Calls Delivered</h3>
+        <p class="desc">Qualified prospects who have confirmed interest and fit your criteria get booked directly into your calendar. You just show up.</p>
+        <ul class="offer-list">
+          <li>Pre-qualification checklist</li>
+          <li>Calendar integration</li>
+          <li>Pre-call brief on each lead</li>
+          <li>Weekly pipeline report</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK A CALL -->
+<section class="cta" id="book">
+  <div class="section-inner">
+    <div class="cta-box">
+      <h2>Book Your Free<br><span>Discovery Call</span></h2>
+      <p>30 minutes. We'll show you exactly how many qualified prospects exist in your target market and what a realistic pipeline looks like for your MSP.</p>
+      <div class="cal-embed">
+        <p class="form-label" style="margin-bottom:1.2rem">Tell us about your MSP first</p>
+        <div class="form-row">
+          <div class="form-two">
+            <input type="text" placeholder="Your name" required />
+            <input type="email" placeholder="Business email" required />
+          </div>
+          <input type="text" placeholder="Company name / MSP name" required />
+          <div class="form-two">
+            <input type="text" placeholder="Your location / country" />
+            <input type="text" placeholder="WhatsApp / phone (optional)" />
+          </div>
+          <select required>
+            <option value="" disabled selected>Monthly revenue range</option>
+            <option>Under $10k/mo MRR</option>
+            <option>$10k – $30k/mo MRR</option>
+            <option>$30k – $80k/mo MRR</option>
+            <option>$80k+/mo MRR</option>
+          </select>
+          <select required>
+            <option value="" disabled selected>What industries do you serve?</option>
+            <option>Healthcare</option>
+            <option>Legal / Law Firms</option>
+            <option>Finance / Accounting</option>
+            <option>Manufacturing</option>
+            <option>Construction / Property</option>
+            <option>General / Multiple Industries</option>
+            <option>Other</option>
+          </select>
+          <textarea placeholder="What's your biggest challenge with getting new clients right now?"></textarea>
+          <button type="button" class="btn-book" onclick="handleBook(this)">Book My Free Discovery Call →</button>
+          <p class="form-note">We'll email you within 4 hours to confirm a time. No pitch, no pressure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">MSPs<span style="color:var(--accent)">Acquisition</span>.com</a>
+  <p style="margin-top:0.4rem">© 2026 MSPsAcquisition.com &nbsp;·&nbsp; <a href="mailto:hello@mspsacquisition.com">hello@mspsacquisition.com</a></p>
+  <p style="margin-top:0.6rem;font-size:0.8rem">
+    <a href="YOUR_PRIVACY_POLICY_GOOGLE_DOC_LINK" target="_blank" rel="noopener">Privacy Policy</a>
+    &nbsp;·&nbsp;
+    <a href="YOUR_TERMS_CONDITIONS_GOOGLE_DOC_LINK" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+  </p>
+</footer>
+
+<script>
+/* ── VSL EMBED ─────────────────────────────────────────────────────────────
+   To activate your video, replace VIDEO_ID below with your actual ID:
+   • YouTube:  VIDEO_ID = "dQw4w9WgXcQ"  (the part after watch?v=)
+   • Loom:     change the embed URL to:  https://www.loom.com/embed/YOUR_LOOM_ID
+────────────────────────────────────────────────────────────────────────── */
+var VSL_TYPE = 'youtube'; // 'youtube' or 'loom'
+var VSL_ID   = 'YOUR_VIDEO_ID_HERE';
+
+function loadVSL() {
+  var box = document.getElementById('vslBox');
+  var ph  = document.getElementById('vslPlaceholder');
+  if (VSL_ID === 'YOUR_VIDEO_ID_HERE') {
+    ph.innerHTML = '<div style="color:rgba(255,255,255,0.5);font-size:0.9rem;text-align:center;padding:2rem;line-height:1.7">No video added yet.<br>Open the HTML file and set <code style="color:#00C2FF">VSL_ID</code> to your YouTube or Loom video ID.</div>';
+    return;
+  }
+  var src = VSL_TYPE === 'loom'
+    ? 'https://www.loom.com/embed/' + VSL_ID + '?autoplay=1'
+    : 'https://www.youtube.com/embed/' + VSL_ID + '?autoplay=1&rel=0&modestbranding=1';
+  var iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:14px';
+  iframe.allow = 'autoplay; fullscreen';
+  iframe.allowFullscreen = true;
+  box.appendChild(iframe);
+  ph.style.display = 'none';
+}
+
+function handleBook(btn) {
+  const inputs = document.querySelectorAll('.form-row input[required], .form-row select[required]');
+  let valid = true;
+  inputs.forEach(el => { if (!el.value) valid = false; });
+  if (!valid) {
+    btn.style.background = '#ef4444';
+    btn.textContent = 'Please fill in all required fields';
+    setTimeout(() => {
+      btn.style.background = 'var(--accent)';
+      btn.textContent = 'Book My Free Discovery Call →';
+    }, 2000);
+    return;
+  }
+  btn.textContent = '✓ Request Sent — We\'ll confirm within 4 hours';
+  btn.style.background = '#22c55e';
+  btn.style.color = '#fff';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
