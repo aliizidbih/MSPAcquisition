@@ -45,7 +45,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(6,14,31,0.92);border-botto
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 
 /* BIG HEADLINE */
-.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-2px;text-transform:uppercase;margin-bottom:1.2rem;text-align:center}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-1px;text-transform:uppercase;margin-bottom:1.2rem;text-align:center}
 .hero h1 .line1{color:var(--white);display:block}
 .hero h1 .line2{color:var(--accent);display:block}
 
@@ -238,40 +238,9 @@ footer a:hover{color:var(--accent)}
     <div class="cta-box">
       <h2>Book Your Free<br><span>Discovery Call</span></h2>
       <p>30 minutes. We'll show you exactly how many qualified prospects exist in your target market and what a realistic pipeline looks like for your MSP.</p>
-      <div class="cal-embed">
-        <p class="form-label" style="margin-bottom:1.2rem">Tell us about your MSP first</p>
-        <div class="form-row">
-          <div class="form-two">
-            <input type="text" placeholder="Your name" required />
-            <input type="email" placeholder="Business email" required />
-          </div>
-          <input type="text" placeholder="Company name / MSP name" required />
-          <div class="form-two">
-            <input type="text" placeholder="Your location / country" />
-            <input type="text" placeholder="WhatsApp / phone (optional)" />
-          </div>
-          <select required>
-            <option value="" disabled selected>Monthly revenue range</option>
-            <option>Under $10k/mo MRR</option>
-            <option>$10k – $30k/mo MRR</option>
-            <option>$30k – $80k/mo MRR</option>
-            <option>$80k+/mo MRR</option>
-          </select>
-          <select required>
-            <option value="" disabled selected>What industries do you serve?</option>
-            <option>Healthcare</option>
-            <option>Legal / Law Firms</option>
-            <option>Finance / Accounting</option>
-            <option>Manufacturing</option>
-            <option>Construction / Property</option>
-            <option>General / Multiple Industries</option>
-            <option>Other</option>
-          </select>
-          <textarea placeholder="What's your biggest challenge with getting new clients right now?"></textarea>
-          <button type="button" class="btn-book" onclick="handleBook(this)">Book My Free Discovery Call →</button>
-          <p class="form-note">We'll email you within 4 hours to confirm a time. No pitch, no pressure.</p>
-        </div>
-      </div>
+      <!-- Calendly inline widget -->
+      <div class="calendly-inline-widget" data-url="https://calendly.com/ali-mspsacquisition/30min?hide_gdpr_banner=1&background_color=0C1A35&text_color=ffffff&primary_color=00C2FF" style="min-width:320px;height:700px;border-radius:14px;overflow:hidden;"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </div>
 </section>
