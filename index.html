@@ -347,6 +347,23 @@ function goToCalendly() {
   if (!valid) {
     return;
   }
+  // Send data to Formspree (saves the lead details)
+  var data = {
+    name: document.getElementById('f-name').value,
+    email: document.getElementById('f-email').value,
+    company: document.getElementById('f-company').value,
+    location: document.getElementById('f-location').value,
+    phone: document.getElementById('f-phone').value,
+    revenue: document.getElementById('f-mrr').value,
+    industry: document.getElementById('f-industry').value,
+    challenge: document.getElementById('f-challenge').value
+  };
+  fetch('https://formspree.io/f/mrevokpq', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify(data)
+  }).catch(function(err){ console.log('Formspree error:', err); });
+
   // Hide form, show Calendly
   document.getElementById('step1').style.display = 'none';
   document.getElementById('step2').style.display = 'block';
