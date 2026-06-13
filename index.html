@@ -243,35 +243,12 @@ footer a:hover{color:var(--accent)}
       <!-- STEP 1: Details Form -->
       <div id="step1">
         <div class="cal-embed">
-          <p class="form-label" style="margin-bottom:1.2rem">Step 1 of 2 — Tell us about your MSP</p>
+          <p class="form-label" style="margin-bottom:1.2rem">Step 1 of 2 — Quick details before booking</p>
           <div class="form-row">
-            <div class="form-two">
-              <input type="text" id="f-name" placeholder="Your name" required />
-              <input type="email" id="f-email" placeholder="Business email" required />
-            </div>
+            <input type="text" id="f-name" placeholder="Your name" required />
             <input type="text" id="f-company" placeholder="Company name / MSP name" required />
-            <div class="form-two">
-              <input type="text" id="f-location" placeholder="Your location / country" />
-              <input type="text" id="f-phone" placeholder="WhatsApp / phone (optional)" />
-            </div>
-            <select id="f-mrr" required>
-              <option value="" disabled selected>Monthly revenue range</option>
-              <option>Under $10k/mo MRR</option>
-              <option>$10k – $30k/mo MRR</option>
-              <option>$30k – $80k/mo MRR</option>
-              <option>$80k+/mo MRR</option>
-            </select>
-            <select id="f-industry" required>
-              <option value="" disabled selected>What industries do you serve?</option>
-              <option>Healthcare</option>
-              <option>Legal / Law Firms</option>
-              <option>Finance / Accounting</option>
-              <option>Manufacturing</option>
-              <option>Construction / Property</option>
-              <option>General / Multiple Industries</option>
-              <option>Other</option>
-            </select>
-            <textarea id="f-challenge" placeholder="What's your biggest challenge with getting new clients right now?" style="resize:none;height:80px"></textarea>
+            <input type="email" id="f-email" placeholder="Business email" required />
+            <input type="text" id="f-phone" placeholder="WhatsApp / phone (optional)" />
             <button type="button" class="btn-book" onclick="goToCalendly()">Next — Pick Your Call Time →</button>
             <p class="form-note">Step 2: Choose a date & time that works for you.</p>
           </div>
@@ -330,10 +307,8 @@ function loadVSL() {
 function goToCalendly() {
   var required = [
     document.getElementById('f-name'),
-    document.getElementById('f-email'),
     document.getElementById('f-company'),
-    document.getElementById('f-mrr'),
-    document.getElementById('f-industry')
+    document.getElementById('f-email')
   ];
   var valid = true;
   required.forEach(function(el) {
@@ -350,13 +325,9 @@ function goToCalendly() {
   // Send data to Formspree (saves the lead details)
   var data = {
     name: document.getElementById('f-name').value,
-    email: document.getElementById('f-email').value,
     company: document.getElementById('f-company').value,
-    location: document.getElementById('f-location').value,
-    phone: document.getElementById('f-phone').value,
-    revenue: document.getElementById('f-mrr').value,
-    industry: document.getElementById('f-industry').value,
-    challenge: document.getElementById('f-challenge').value
+    email: document.getElementById('f-email').value,
+    phone: document.getElementById('f-phone').value
   };
   fetch('https://formspree.io/f/mrevokpq', {
     method: 'POST',
